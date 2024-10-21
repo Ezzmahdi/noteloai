@@ -18,6 +18,7 @@ const ChatComponent = ({ chatId }: Props) => {
       const response = await axios.post<Message[]>("/api/get-messages", {
         chatId,
       });
+      console.log(response.data)
       return response.data;
     },
   });
