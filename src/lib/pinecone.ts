@@ -24,12 +24,11 @@ type PDFPage = {
 
 export async function loadS3IntoPinecone(fileKey: string) {
   // 1. obtain the pdf -> downlaod and read from pdf
-  console.log("downloading s3 into file system");
   const file_name = await downloadFromS3(fileKey);
   if (!file_name) {
     throw new Error("could not download from s3");
   }
-  console.log("loading pdf into memory: " + file_name);
+
   const loader = new PDFLoader(file_name);
   const pages = (await loader.load()) as PDFPage[];
   
@@ -43,17 +42,12 @@ export async function loadS3IntoPinecone(fileKey: string) {
 
   // 4. upload to pinecone
   const client = await getPineconeClient();
-  console.log('client: ', client)
   const pineconeIndex = await client.index("notelo-pdf");
-  console.log('index: ', pineconeIndex)
   const namespace = pineconeIndex.namespace(convertToAscii(fileKey));
-  console.log('namespace: ', namespace)
 
-  console.log("inserting vectors into pinecone");
   await namespace.upsert(vectors);
 
 
-  console.log('Finished loadS3IntoPinecone')
   return documents[0];
 }
 
