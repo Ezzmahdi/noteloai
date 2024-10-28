@@ -7,6 +7,8 @@ import { MessageCircle, PlusCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
 import axios from "axios";
 import SubscriptionButton from "./SubscriptionButton";
+import styles from './styles.module.css';
+
 
 type Props = {
   chats: DrizzleChat[];
@@ -25,8 +27,7 @@ const ChatSideBar = ({ chats, chatId, isPro }: Props) => {
           New Chat
         </Button>
       </Link>
-
-      <div className="flex h-full max-h-screen overflow-scroll pb-20 flex-col gap-2 mt-4">
+      <div className={`${styles.hiddenScrollbar} flex h-full max-h-screen overflow-scroll pb-20 flex-col gap-2 mt-4`}>
         {chats.map((chat) => (
           <Link key={chat.id} href={`/chat/${chat.id}`}>
             <div

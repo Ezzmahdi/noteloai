@@ -1,0 +1,11 @@
+/* styles.module.css */
+.hiddenScrollbar {
+    overflow: auto;
+    height: 200px; /* Set height to make content scrollable */
+    scrollbar-width: none; /* Firefox */
+  }
+  
+  .hiddenScrollbar::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Edge */
+  }
+  
